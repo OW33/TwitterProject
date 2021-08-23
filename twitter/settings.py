@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '192.168.33.10', 'localhost']
 
+INTERNAL_IPS = ['10.0.2.2']
 
 # Application definition
 
@@ -39,9 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # third party
     'rest_framework',
-
+    'debug_toolbar',
+    
     # project apps
     'accounts',
+
+
+
 ]
 
 REST_FRAMEWORK = {
@@ -50,6 +55,10 @@ REST_FRAMEWORK = {
 }
 
 MIDDLEWARE = [
+    # include the debug toolbar middleware as early as possible
+    # but must come after any other middlewares that encodes the response content
+    # such as 'GZipMiddleware'
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
