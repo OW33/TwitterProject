@@ -20,6 +20,7 @@ from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
 from accounts.api import views
+from django.conf import settings
 
 router = routers.DefaultRouter()
 router.register(r'api/users', views.UserViewSet)
